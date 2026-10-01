@@ -10,8 +10,24 @@
 export default grammar({
   name: "lox",
 
+  extras: ($) => [
+    /\s/,
+    $.comment,
+  ],
+
+  externals: ($) => [$._block_comment_content],
+
   rules: {
     // TODO: add the actual grammar rules
-    source_file: $ => "hello"
+    source_file: () => "hello",
+
+    comment: ($) => choice(
+      seq("//", /(\\+(.|\r?\n)|[^\\\n])*/),
+      seq(
+        "/*",
+        optional($._block_comment_content),
+        "*/",
+      ),
+    ),
   }
 });
