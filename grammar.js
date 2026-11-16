@@ -49,6 +49,7 @@ export default grammar({
       $.ternary_expression,
       $.binary_expression,
       $.unary_expression,
+      $.assignment,
     ),
 
     comma_expression: ($) => seq(
@@ -85,6 +86,7 @@ export default grammar({
       )
     ),
     unary_expression: ($) => prec.right(PREC.unary, seq(choice("!", "-"), $.expression)),
+    assignment: ($) => prec.right(seq($.identifier, "=", $.expression)),
 
     primary: ($) => choice(
       $.boolean_literal,
