@@ -30,6 +30,7 @@
   "<="
   "<"
   ">"
+  "="
 ] @operator
 
 (ternary_expression
@@ -38,4 +39,7 @@
 (ternary_expression
   ":" @operator)
 
-"print" @keyword
+[
+  "print"
+  "var"
+] @keyword

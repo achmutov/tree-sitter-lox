@@ -28,9 +28,17 @@ export default grammar({
 
   rules: {
     source_file: ($) => repeat(choice(
+      $.var_decl,
+      $.statement
+    )),
+
+    var_decl: ($) => seq("var", $.identifier, optional(seq("=", $.expression)), ";"),
+    identifier: () => /[a-zA-Z_][a-zA-Z0-9_]*/,
+
+    statement: ($) => choice(
       $.print_stmt,
       $.expression_stmt,
-    )),
+    ),
 
     print_stmt: ($) => seq("print", $.expression, ";"),
     expression_stmt: ($) => seq($.expression, ";"),
@@ -83,6 +91,7 @@ export default grammar({
       $.nil,
       $.number,
       $.string,
+      $.identifier,
     ),
     grouping: ($) => seq("(", choice($.expression, $.comma_expression), ")"),
 
