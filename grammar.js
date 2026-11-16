@@ -27,7 +27,13 @@ export default grammar({
   externals: ($) => [$._block_comment_content],
 
   rules: {
-    source_file: ($) => $.expression,
+    source_file: ($) => repeat(choice(
+      $.print_stmt,
+      $.expression_stmt,
+    )),
+
+    print_stmt: ($) => seq("print", $.expression, ";"),
+    expression_stmt: ($) => seq($.expression, ";"),
 
     expression: ($) => choice(
       $.grouping,

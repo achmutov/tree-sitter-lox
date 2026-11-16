@@ -13,7 +13,10 @@
   ")"
 ] @punctuation.bracket
 
-"," @punctuation.delimiter
+[
+  ","
+  ";"
+] @punctuation.delimiter
 
 [
   "*"
@@ -34,3 +37,5 @@
 
 (ternary_expression
   ":" @operator)
+
+"print" @keyword
