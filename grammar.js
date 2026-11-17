@@ -44,12 +44,14 @@ export default grammar({
       $.expression_stmt,
       $.block,
       $.if_stmt,
+      $.while_stmt,
     ),
 
     print_stmt: ($) => seq("print", $.expression, ";"),
     expression_stmt: ($) => seq($.expression, ";"),
     block: ($) => seq("{", repeat($.declaration), "}"),
     if_stmt: ($) => prec.right(seq("if", "(", $.expression, ")", $.statement, optional(seq("else", $.statement)))),
+    while_stmt: ($) => seq("while", "(", $.expression, ")", $.statement),
 
     expression: ($) => choice(
       $.grouping,

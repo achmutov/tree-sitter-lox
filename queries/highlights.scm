@@ -50,3 +50,5 @@
   "if"
   "else"
 ] @keyword.conditional
+
+"while" @keyword.repeat
