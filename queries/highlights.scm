@@ -44,6 +44,7 @@
 [
   "print"
   "var"
+  "break"
 ] @keyword
 
 [
