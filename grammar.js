@@ -8,11 +8,13 @@
 // @ts-check
 
 const PREC = {
-  unary: 5,
-  multiplicative: 4,
-  additive: 3,
-  comparative: 2,
-  equality: 1,
+  unary: 7,
+  multiplicative: 6,
+  additive: 5,
+  comparative: 4,
+  equality: 3,
+  and: 2,
+  or: 1,
   ternary: 0,
 }
 
@@ -78,6 +80,8 @@ export default grammar({
         [PREC.additive, choice("+", "-")],
         [PREC.comparative, choice("<", ">", "<=", ">=")],
         [PREC.equality, choice("==", "!=")],
+        [PREC.and, "and"],
+        [PREC.or, "or"],
       ].map(
         ([precedence, operator]) => prec.left(
           // @ts-ignore

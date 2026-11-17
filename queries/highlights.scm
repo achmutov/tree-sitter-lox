@@ -31,6 +31,8 @@
   "<"
   ">"
   "="
+  "and"
+  "or"
 ] @operator
 
 (ternary_expression
