@@ -43,3 +43,8 @@
   "print"
   "var"
 ] @keyword
+
+[
+  "if"
+  "else"
+] @keyword.conditional
