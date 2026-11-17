@@ -27,7 +27,7 @@ export default grammar({
   externals: ($) => [$._block_comment_content],
 
   rules: {
-    source_file: ($) => repeat($.declaration),
+    source_file: ($) => seq(repeat($.declaration), optional($.expression)),
 
     declaration: ($) => choice(
       $.var_decl,
