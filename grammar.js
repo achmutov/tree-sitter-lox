@@ -45,6 +45,7 @@ export default grammar({
       $.block,
       $.if_stmt,
       $.while_stmt,
+      $.for_stmt,
     ),
 
     print_stmt: ($) => seq("print", $.expression, ";"),
@@ -52,6 +53,16 @@ export default grammar({
     block: ($) => seq("{", repeat($.declaration), "}"),
     if_stmt: ($) => prec.right(seq("if", "(", $.expression, ")", $.statement, optional(seq("else", $.statement)))),
     while_stmt: ($) => seq("while", "(", $.expression, ")", $.statement),
+    for_stmt: ($) => seq(
+      "for",
+      "(",
+      choice($.var_decl, $.expression_stmt, ";"),
+      optional($.expression),
+      ";",
+      optional($.expression),
+       ")",
+      $.statement,
+    ),
 
     expression: ($) => choice(
       $.grouping,

@@ -51,4 +51,7 @@
   "else"
 ] @keyword.conditional
 
-"while" @keyword.repeat
+[
+  "while"
+  "for"
+] @keyword.repeat
