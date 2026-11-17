@@ -27,10 +27,12 @@ export default grammar({
   externals: ($) => [$._block_comment_content],
 
   rules: {
-    source_file: ($) => repeat(choice(
+    source_file: ($) => repeat($.declaration),
+
+    declaration: ($) => choice(
       $.var_decl,
       $.statement
-    )),
+    ),
 
     var_decl: ($) => seq("var", $.identifier, optional(seq("=", $.expression)), ";"),
     identifier: () => /[a-zA-Z_][a-zA-Z0-9_]*/,
@@ -38,10 +40,12 @@ export default grammar({
     statement: ($) => choice(
       $.print_stmt,
       $.expression_stmt,
+      $.block,
     ),
 
     print_stmt: ($) => seq("print", $.expression, ";"),
     expression_stmt: ($) => seq($.expression, ";"),
+    block: ($) => seq("{", repeat($.declaration), "}"),
 
     expression: ($) => choice(
       $.grouping,
