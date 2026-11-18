@@ -8,6 +8,7 @@
 // @ts-check
 
 const PREC = {
+  call: 8,
   unary: 7,
   multiplicative: 6,
   additive: 5,
@@ -72,6 +73,7 @@ export default grammar({
       $.ternary_expression,
       $.binary_expression,
       $.unary_expression,
+      $.call_expression,
       $.assignment,
     ),
 
@@ -111,6 +113,15 @@ export default grammar({
       )
     ),
     unary_expression: ($) => prec.right(PREC.unary, seq(choice("!", "-"), $.expression)),
+    call_expression: ($) => prec.left(PREC.call, seq(
+      field("name", $.expression),
+      "(",
+      optional(seq(
+        $.expression,
+        repeat(seq(",", $.expression)),
+        optional(","))),
+      ")"
+    )),
     assignment: ($) => prec.right(seq($.identifier, "=", $.expression)),
 
     primary: ($) => choice(

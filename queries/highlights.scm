@@ -56,3 +56,6 @@
   "while"
   "for"
 ] @keyword.repeat
+
+(call_expression
+  name: (expression) @function)
