@@ -58,4 +58,11 @@
 ] @keyword.repeat
 
 (call_expression
-  name: (expression) @function)
+  name: (expression) @function.call)
+
+(fun_decl
+  name: (identifier) @function)
+
+"fun" @keyword.function
+
+(builtin_fun_name) @function.builtin

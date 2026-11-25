@@ -34,11 +34,24 @@ export default grammar({
 
     declaration: ($) => choice(
       $.var_decl,
+      $.fun_decl,
       $.statement
     ),
 
     var_decl: ($) => seq("var", $.identifier, optional(seq("=", $.expression)), ";"),
+    fun_decl: ($) => seq(
+      "fun",
+      field("name", choice($.identifier, $.builtin_fun_name)),
+      "(",
+      optional(seq(
+        $.expression,
+        repeat(seq(",", $.expression)),
+        optional(","))),
+      ")",
+      $.block
+    ),
     identifier: () => /[a-zA-Z_][a-zA-Z0-9_]*/,
+    builtin_fun_name: () => choice("clock"),
 
     statement: ($) => choice(
       $.print_stmt,
