@@ -66,3 +66,5 @@
 "fun" @keyword.function
 
 (builtin_fun_name) @function.builtin
+
+"return" @keyword.return

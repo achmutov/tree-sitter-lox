@@ -61,6 +61,7 @@ export default grammar({
       $.while_stmt,
       $.for_stmt,
       $.break_stmt,
+      $.return_stmt,
     ),
 
     print_stmt: ($) => seq("print", $.expression, ";"),
@@ -79,6 +80,7 @@ export default grammar({
       $.statement,
     ),
     break_stmt: () => seq("break", ";"),
+    return_stmt: ($) => seq("return", $.expression, ";"),
 
     expression: ($) => choice(
       $.grouping,
